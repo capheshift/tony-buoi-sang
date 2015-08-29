@@ -18,7 +18,11 @@ var ContactPage = React.createClass({
   render: function() {
     return (
       <div>
+<<<<<<< HEAD
         <p>CONTACT thong</p>
+=======
+        <p>DEMO HERE</p>
+>>>>>>> 84312abb239202e688de110213fe27272212e1d1
         <button>Skeleton</button>
       </div>
     );
