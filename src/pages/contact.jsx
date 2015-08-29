@@ -18,7 +18,7 @@ var ContactPage = React.createClass({
   render: function() {
     return (
       <div>
-        <p>CONTACT PAGE</p>
+        <p>CONTACT thong</p>
         <button>Skeleton</button>
       </div>
     );
