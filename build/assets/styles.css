@@ -726,7 +726,7 @@ button {
 
 .header h1 {
   font-family: "Times New Roman", Times, serif;
-  color: #C33; }
+  font-size: 35px; }
 
 .date-time {
   width: 100%;
@@ -735,6 +735,6 @@ button {
 .new p {
   font-size: 15px; }
 
-.date-time li {
+.date-time span {
   display: inline-block;
   color: #39F; }
