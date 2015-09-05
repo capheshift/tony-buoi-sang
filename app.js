@@ -21310,14 +21310,10 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.nav({className: "navbar"}, 
-	        Link({ className: 'navbar-brand', to: '/' }, 'Welcome'), 
-	        React.DOM.ul({className: "nav navbar-nav"}, 
-	          React.DOM.li({className: this._checkUri('')}, 
-	            Link({ to: '/' }, 'Home')
-	          ), 
-	          React.DOM.li({className: this._checkUri('contact')}, 
-	            Link({ to: '/contact' }, 'Contact')
+	      React.DOM.div({className: "text-center"}, 
+	        React.DOM.nav({className: "navbar"}, 
+	          React.DOM.div({className: "header"}, 
+	            React.DOM.h1(null, "Tony Buổi sáng")
 	          )
 	        )
 	      )
@@ -21401,8 +21397,7 @@
 	var React = __webpack_require__(1);
 	var DefaultLayout = React.createFactory(__webpack_require__(160));
 
-	var ContactPage = React.createClass({
-	  displayName: 'Contact page',
+	var Contact = React.createClass({displayName: 'Contact',
 
 	  getDefaultProps: function() {
 	    return {
@@ -21412,15 +21407,60 @@
 
 	  render: function() {
 	    return (
-	      React.DOM.div(null, 
-	        React.DOM.p(null, "DEMO HERE"), 
-	        React.DOM.button(null, "Skeleton")
+	      React.DOM.div({className: "demo"}, 
+	        React.DOM.div({className: "main-content"}, 
+	          React.DOM.div({className: "data"}, 
+	            React.DOM.div({className: "new"}, 
+	              React.DOM.p(null, 
+	                "----THÂN GỬI CÁC BẠN" + ' ' +
+	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
+	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
+	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
+	              )
+	            ), 
+	            React.DOM.div({className: "date-time"}, 
+	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
+	            )
+	          ), 
+	          React.DOM.div({className: "data"}, 
+	            React.DOM.div({className: "new"}, 
+	              React.DOM.p(null, 
+	                "----THÂN GỬI CÁC BẠN" + ' ' +
+	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
+	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
+	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
+	              )
+	            ), 
+	            React.DOM.div({className: "date-time"}, 
+	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
+	            )
+	          ), 
+	          React.DOM.div({className: "data"}, 
+	            React.DOM.div({className: "new"}, 
+	              React.DOM.p(null, 
+	                "----THÂN GỬI CÁC BẠN" + ' ' +
+	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
+	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
+	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
+	              )
+	            ), 
+	            React.DOM.div({className: "date-time"}, 
+	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
+	            )
+	          ), 
+	          React.DOM.div({className: "col-six"}, 
+	            React.DOM.button({className: "button-primary u-full-width"}, "PREVIOUS")
+	          ), 
+	          React.DOM.div({className: "col-six"}, 
+	            React.DOM.button({className: "button-primary u-full-width"}, "NEXT")
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
 
-	module.exports = ContactPage;
+	module.exports = Contact;
 
 
 /***/ }

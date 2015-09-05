@@ -700,3 +700,41 @@ there.
 /* Larger than Desktop HD */
 .navbar {
   border-bottom: 1px solid whitesmoke; }
+
+.text-center {
+  text-align: center; }
+
+.col-six {
+  width: 50%;
+  display: inline-block; }
+
+button {
+  border-radius: 0; }
+
+.data {
+  width: 100%;
+  height: auto;
+  border: 1px sold red;
+  border-bottom: 1px solid #9FF; }
+
+.demo {
+  width: 100%; }
+
+.header {
+  width: 100%;
+  height: auto; }
+
+.header h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: #C33; }
+
+.date-time {
+  width: 100%;
+  height: 100%; }
+
+.new p {
+  font-size: 15px; }
+
+.date-time li {
+  display: inline-block;
+  color: #39F; }
