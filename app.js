@@ -21412,7 +21412,7 @@
 	      React.DOM.div({className: "text-center"}, 
 	        React.DOM.nav({className: "navbar"}, 
 	          React.DOM.div({className: "header"}, 
-	            React.DOM.h1(null, "Tony Buổi sáng")
+	            React.DOM.h1(null, "Tony Buổi Sáng")
 	          )
 	        )
 	      )
