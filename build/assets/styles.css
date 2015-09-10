@@ -730,11 +730,17 @@ button {
 
 .date-time {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  display: inline-block;
+  color: #39F;
+  font-style: italic;
+  text-align: right; }
 
 .new p {
   font-size: 15px; }
 
-.date-time span {
-  display: inline-block;
-  color: #39F; }
+div ul li p.content {
+  text-align: justify; }
+
+ul {
+  list-style-type: decimal-leading-zero; }

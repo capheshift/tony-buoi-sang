@@ -105,9 +105,9 @@ var HomePage = React.createClass({
       this.state.data.map(function (item) {
         listItem.push(
           <li>
-            <p>
+            <p className="content">
               {item.message}
-              <br /><span>{moment(item.created_time).fromNow()}</span>
+              <br /><span className="date-time">{moment(item.created_time).format('DD/MM/YYYY')} - {moment(item.created_time).fromNow()}</span>
             </p>
           </li>
         );
@@ -115,9 +115,15 @@ var HomePage = React.createClass({
     }
     return (
       <div>
-        {listItem}
-        <button onClick={this.previous}>PREVIOUS</button>
-        <button onClick={this.next}>NEXT</button>
+        <ul>
+          {listItem}
+        </ul>
+        <div className="col-six">
+          <button className="button-primary u-full-width" onClick={this.previous}>PREVIOUS</button>
+        </div>
+        <div className="col-six">
+          <button className="button-primary u-full-width" onClick={this.next}>NEXT</button>
+        </div>
       </div>
     );
   }

@@ -299,7 +299,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -351,7 +353,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');
@@ -21336,9 +21337,9 @@
 	      this.state.data.map(function (item) {
 	        listItem.push(
 	          React.DOM.li(null, 
-	            React.DOM.p(null, 
+	            React.DOM.p({className: "content"}, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span(null, moment(item.created_time).fromNow())
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
 	            )
 	          )
 	        );
@@ -21346,9 +21347,15 @@
 	    }
 	    return (
 	      React.DOM.div(null, 
-	        listItem, 
-	        React.DOM.button({onClick: this.previous}, "PREVIOUS"), 
-	        React.DOM.button({onClick: this.next}, "NEXT")
+	        React.DOM.ul(null, 
+	          listItem
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.previous}, "PREVIOUS")
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.next}, "NEXT")
+	        )
 	      )
 	    );
 	  }
