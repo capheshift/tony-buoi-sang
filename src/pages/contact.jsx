@@ -6,7 +6,56 @@
 var React = require('react');
 var DefaultLayout = React.createFactory(require('../layouts/Default'));
 
-var Contact = React.createClass({
+var HomePage = React.createClass({
+  getInitialState: function () {
+    return {
+      data: [],
+      paging: {}
+    };
+  },
+
+  componentWillMount: function () {
+    var that = this;
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '148203832185750',
+        xfbml      : true,
+        version    : 'v2.4'
+      });
+      that.getData();
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  },
+
+  getData: function () {
+    var that = this;
+    var appId = '148203832185750';
+    var appSecret = 'f566359f16826bba531241d42c464cd8';
+    var url = 'https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id=' + appId + '&client_secret=' + appSecret;
+    var pageName = 'TonyBuoiSang';
+
+    return $.ajax({
+      url: url,
+      method: 'GET',
+      success: function (data) {
+        FB.api(pageName + '/feed?' + data, 'get', function (response) {
+          if (response && !response.error) {
+            that.setState({
+              data: response.data,
+              paging: response.paging
+            });
+          }
+        });
+      }
+    });
+  },
 
   getDefaultProps: function() {
     return {
@@ -14,59 +63,70 @@ var Contact = React.createClass({
     };
   },
 
+  previous: function () {
+    var that = this;
+    var url = this.state.paging.previous;
+    $('body').animate({scrollTop: 0}, 1000);
+    return $.ajax({
+      url: url,
+      method: 'GET',
+      success: function (res) {
+        if (res.data.length) {
+          that.setState({
+            data: res.data,
+            paging: res.paging
+          });
+        }
+      }
+    });
+  },
+
+  next: function () {
+    var that = this;
+    var url = this.state.paging.next;
+    $('body').animate({scrollTop: 0}, 1000);
+    return $.ajax({
+      url: url,
+      method: 'GET',
+      success: function (res) {
+        if (res.data.length) {
+          that.setState({
+            data: res.data,
+            paging: res.paging
+          });
+        }
+      }
+    });
+  },
+
   render: function() {
+    var listItem = [];
+    if (this.state.data.length) {
+      this.state.data.map(function (item) {
+        listItem.push(
+          <li>
+            <p className="content">
+              {item.message}
+              <br /><span className="date-time"><img src="assets/image/icon.jpg"/> {moment(item.created_time).format('DD/MM/YYYY')} - {moment(item.created_time).fromNow()}</span>
+            </p>
+          </li>
+        );
+      });
+    }
     return (
-      <div className="demo">
-        <div className="main-content">
-          <div className="data">
-            <div className="new">
-              <p>
-                ----THÂN GỬI CÁC BẠN
-                Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)
-                Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa.
-                các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!
-              </p>
-            </div>
-            <div className="date-time">
-              <span>3hrs</span> <span>27</span> <span>Jun</span> <span>2015</span>
-            </div>
-          </div>
-          <div className="data">
-            <div className="new">
-              <p>
-                ----THÂN GỬI CÁC BẠN
-                Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)
-                Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa.
-                các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!
-              </p>
-            </div>
-            <div className="date-time">
-              <span>3hrs</span> <span>27</span> <span>Jun</span> <span>2015</span>
-            </div>
-          </div>
-          <div className="data">
-            <div className="new">
-              <p>
-                ----THÂN GỬI CÁC BẠN
-                Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)
-                Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa.
-                các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!
-              </p>
-            </div>
-            <div className="date-time">
-              <span>3hrs</span> <span>27</span> <span>Jun</span> <span>2015</span>
-            </div>
-          </div>
-          <div className="col-six">
-            <button className="button-primary u-full-width">PREVIOUS</button>
-          </div>
-          <div className="col-six">
-            <button className="button-primary u-full-width">NEXT</button>
-          </div>
+      <div>
+        <ul>
+          {listItem}
+        </ul>
+        <div className="col-six">
+          <button className="button-primary u-full-width" onClick={this.previous}>PREVIOUS</button>
+        </div>
+        <div className="col-six">
+          <button className="button-primary u-full-width" onClick={this.next}>NEXT</button>
         </div>
       </div>
     );
   }
 });
 
-module.exports = Contact;
+module.exports = HomePage;
