@@ -14,9 +14,9 @@ var Navbar = React.createClass({
 
   render() {
     return (
-      <div className="text-center">
+      <div>
         <div className="header">
-            <h1>Tony Buổi sáng</h1>
+          <h1>Tony Buổi sáng</h1>
         </div>
         <nav className="navbar">
         </nav>
