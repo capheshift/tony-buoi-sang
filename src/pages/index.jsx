@@ -10,7 +10,8 @@ var HomePage = React.createClass({
   getInitialState: function () {
     return {
       data: [],
-      paging: {}
+      paging: {},
+      cache: {}
     };
   },
 
@@ -32,6 +33,10 @@ var HomePage = React.createClass({
       js.src = '//connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+  },
+
+  cache: function () {
+
   },
 
   getData: function () {

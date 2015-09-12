@@ -772,6 +772,9 @@ a:hover {
   width: 100%;
   height: auto; }
 
+.settings:before {
+  content: '\f073'; }
+
 button {
   border-radius: 0; }
 
@@ -788,4 +791,5 @@ button {
   height: auto;
   display: inline-block;
   text-align: right;
-  font-style: italic; }
+  font-style: italic;
+  font-weight: bold; }
