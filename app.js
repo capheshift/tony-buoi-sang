@@ -87,11 +87,11 @@
 	var router = new Router({
 	  // Main Route
 	  '/': function() {
-	    var page = React.createFactory(__webpack_require__(159));
+	    var page = React.createFactory(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./pages/index\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 	    render(router.getRoute(), page);
 	  },
 	  '/contact': function() {
-	    var page = React.createFactory(__webpack_require__(163));
+	    var page = React.createFactory(__webpack_require__(159));
 	    render(router.getRoute(), page);
 	  }
 	});
@@ -21338,7 +21338,7 @@
 	          React.DOM.li(null, 
 	            React.DOM.p({className: "content"}, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, React.DOM.img({src: "assets/image/icon.jpg"}), " ", moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
 	            )
 	          )
 	        );
@@ -21416,10 +21416,10 @@
 	  render:function() {
 	    return (
 	      React.DOM.div({className: "text-center"}, 
-	        React.DOM.nav({className: "navbar"}, 
-	          React.DOM.div({className: "header"}, 
+	        React.DOM.div({className: "header"}, 
 	            React.DOM.h1(null, "Tony Buổi sáng")
-	          )
+	        ), 
+	        React.DOM.nav({className: "navbar"}
 	        )
 	      )
 	    );
@@ -21488,84 +21488,6 @@
 	});
 
 	module.exports = Link;
-
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @jsx React.DOM
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var DefaultLayout = React.createFactory(__webpack_require__(160));
-
-	var Contact = React.createClass({displayName: 'Contact',
-
-	  getDefaultProps: function() {
-	    return {
-	      layout: DefaultLayout
-	    };
-	  },
-
-	  render: function() {
-	    return (
-	      React.DOM.div({className: "demo"}, 
-	        React.DOM.div({className: "main-content"}, 
-	          React.DOM.div({className: "data"}, 
-	            React.DOM.div({className: "new"}, 
-	              React.DOM.p(null, 
-	                "----THÂN GỬI CÁC BẠN" + ' ' +
-	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
-	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
-	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
-	              )
-	            ), 
-	            React.DOM.div({className: "date-time"}, 
-	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
-	            )
-	          ), 
-	          React.DOM.div({className: "data"}, 
-	            React.DOM.div({className: "new"}, 
-	              React.DOM.p(null, 
-	                "----THÂN GỬI CÁC BẠN" + ' ' +
-	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
-	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
-	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
-	              )
-	            ), 
-	            React.DOM.div({className: "date-time"}, 
-	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
-	            )
-	          ), 
-	          React.DOM.div({className: "data"}, 
-	            React.DOM.div({className: "new"}, 
-	              React.DOM.p(null, 
-	                "----THÂN GỬI CÁC BẠN" + ' ' +
-	                "Chào các bạn , mình cần mua lại các loại giáo trình,sach thể loại nào cũng được. ( tặng cho các bạn tân sinh viên khó khăn và các bạn trao đổi khác)" + ' ' +
-	                "Mình và một số bạn cùng nhau làm dự án này , hi vọng việc quyên góp tặng sách không chỉ ở trường khtn mà còn nhiều trường khác nữa." + ' ' +
-	                "các bạn nào có sách có thể comment hoặc inbox cho mình qua email.pttl3sheep@gmail.com . rất mong các bạn giúp đỡ. Xin cảm ơn.!"
-	              )
-	            ), 
-	            React.DOM.div({className: "date-time"}, 
-	              React.DOM.span(null, "3hrs"), " ", React.DOM.span(null, "27"), " ", React.DOM.span(null, "Jun"), " ", React.DOM.span(null, "2015")
-	            )
-	          ), 
-	          React.DOM.div({className: "col-six"}, 
-	            React.DOM.button({className: "button-primary u-full-width"}, "PREVIOUS")
-	          ), 
-	          React.DOM.div({className: "col-six"}, 
-	            React.DOM.button({className: "button-primary u-full-width"}, "NEXT")
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Contact;
 
 
 /***/ }
