@@ -21242,7 +21242,8 @@
 	  getInitialState: function () {
 	    return {
 	      data: [],
-	      paging: {}
+	      paging: {},
+	      cache: {}
 	    };
 	  },
 
@@ -21264,6 +21265,10 @@
 	      js.src = '//connect.facebook.net/en_US/sdk.js';
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
+	  },
+
+	  cache: function () {
+
 	  },
 
 	  getData: function () {
@@ -21417,7 +21422,8 @@
 	  render:function() {
 	    return (
 	      React.DOM.div(null, 
-	        React.DOM.div({className: "header"}
+	        React.DOM.div({className: "header"}, 
+	          React.DOM.span({className: "settings"})
 	        ), 
 	        React.DOM.nav({className: "navbar"}
 	        )
