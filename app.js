@@ -21422,8 +21422,7 @@
 	  render:function() {
 	    return (
 	      React.DOM.div(null, 
-	        React.DOM.div({className: "header"}, 
-	          React.DOM.span({className: "settings"})
+	        React.DOM.div({className: "header"}
 	        ), 
 	        React.DOM.nav({className: "navbar"}
 	        )
