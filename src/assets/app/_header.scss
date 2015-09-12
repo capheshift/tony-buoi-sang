@@ -1,4 +1,13 @@
 
 .navbar {
-  border-bottom: 1px solid whitesmoke;
+}
+.text-center {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+.header {
+  background-color: #09F;
+  position: fixed;
+  z-index: 100000;
 }

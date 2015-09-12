@@ -87,11 +87,11 @@
 	var router = new Router({
 	  // Main Route
 	  '/': function() {
-	    var page = React.createFactory(__webpack_require__(159));
+	    var page = React.createFactory(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./pages/index\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 	    render(router.getRoute(), page);
 	  },
 	  '/contact': function() {
-	    var page = React.createFactory(__webpack_require__(163));
+	    var page = React.createFactory(__webpack_require__(159));
 	    render(router.getRoute(), page);
 	  }
 	});
@@ -21336,9 +21336,9 @@
 	      this.state.data.map(function (item) {
 	        listItem.push(
 	          React.DOM.li(null, 
-	            React.DOM.p(null, 
+	            React.DOM.p({className: "content"}, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span(null, moment(item.created_time).fromNow())
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, React.DOM.img({src: "assets/image/icon.jpg"}), " ", moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
 	            )
 	          )
 	        );
@@ -21346,9 +21346,15 @@
 	    }
 	    return (
 	      React.DOM.div(null, 
-	        listItem, 
-	        React.DOM.button({onClick: this.previous}, "PREVIOUS"), 
-	        React.DOM.button({onClick: this.next}, "NEXT")
+	        React.DOM.ul(null, 
+	          listItem
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.previous}, "PREVIOUS")
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.next}, "NEXT")
+	        )
 	      )
 	    );
 	  }
@@ -21409,15 +21415,11 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.nav({className: "navbar"}, 
-	        Link({ className: 'navbar-brand', to: '/' }, 'Welcome'), 
-	        React.DOM.ul({className: "nav navbar-nav"}, 
-	          React.DOM.li({className: this._checkUri('')}, 
-	            Link({ to: '/' }, 'Home')
-	          ), 
-	          React.DOM.li({className: this._checkUri('contact')}, 
-	            Link({ to: '/contact' }, 'Contact')
-	          )
+	      React.DOM.div({className: "text-center"}, 
+	        React.DOM.div({className: "header"}, 
+	            React.DOM.h1(null, "Tony Buổi sáng")
+	        ), 
+	        React.DOM.nav({className: "navbar"}
 	        )
 	      )
 	    );
@@ -21486,40 +21488,6 @@
 	});
 
 	module.exports = Link;
-
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @jsx React.DOM
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var DefaultLayout = React.createFactory(__webpack_require__(160));
-
-	var ContactPage = React.createClass({
-	  displayName: 'Contact page',
-
-	  getDefaultProps: function() {
-	    return {
-	      layout: DefaultLayout
-	    };
-	  },
-
-	  render: function() {
-	    return (
-	      React.DOM.div(null, 
-	        React.DOM.p(null, "DEMO HERE"), 
-	        React.DOM.button(null, "Skeleton")
-	      )
-	    );
-	  }
-	});
-
-	module.exports = ContactPage;
 
 
 /***/ }

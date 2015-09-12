@@ -14,17 +14,13 @@ var Navbar = React.createClass({
 
   render() {
     return (
-      <nav className="navbar">
-        {Link({ className: 'navbar-brand', to: '/' }, 'Welcome')}
-        <ul className="nav navbar-nav">
-          <li className={this._checkUri('')}>
-            {Link({ to: '/' }, 'Home')}
-          </li>
-          <li className={this._checkUri('contact')}>
-            {Link({ to: '/contact' }, 'Contact')}
-          </li>
-        </ul>
-      </nav>
+      <div className="text-center">
+        <div className="header">
+            <h1>Tony Buổi sáng</h1>
+        </div>
+        <nav className="navbar">
+        </nav>
+      </div>
     );
   },
 
