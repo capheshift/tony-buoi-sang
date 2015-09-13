@@ -700,15 +700,15 @@ there.
 /* Larger than Desktop HD */
 @font-face {
   font-family: Cambria;
-  src: url(./fonts/Cambria.ttf); }
+  src: url(../fonts/Cambria.ttf); }
 
 @font-face {
   font-family: CambriaItalic;
-  src: url(./fonts/Cambria-Italic.ttf); }
+  src: url(../fonts/Cambria-Italic.ttf); }
 
 @font-face {
   font-family: CambriaBold;
-  src: url(./fonts/Cambria-Bold.ttf); }
+  src: url(../fonts/Cambria-Bold.ttf); }
 
 * {
   margin: 0;
@@ -768,25 +768,64 @@ a:hover {
 .text-justify {
   text-align: justify; }
 
-.header {
-  width: 100%;
-  height: auto; }
+.text-center {
+  margin: 0px;
+  padding: 0px;
+  text-align: center; }
 
-button {
-  border-radius: 0; }
+.header {
+  background-color: #09F;
+  position: fixed;
+  z-index: 100000; }
 
 .col-six {
   width: 50%;
   display: inline-block; }
 
-.content {
-  text-align: justify;
-  word-wrap: break-word; }
+button {
+  border-radius: 0; }
+
+.data {
+  width: 100%;
+  height: auto;
+  border: 1px sold red;
+  border-bottom: 1px solid #9FF; }
+
+.demo {
+  width: 100%; }
+
+.header {
+  width: 100%;
+  height: auto; }
+
+h1 {
+  font-family: "Courier New", Courier, monospace;
+  color: #FFA;
+  font-weight: bold;
+  font-size: 35px;
+  margin-top: 1rem; }
 
 .date-time {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: inline-block;
-  text-align: right;
-  font-style: italic;
-  font-weight: bold; }
+  color: #39F;
+  text-align: right; }
+
+.new p {
+  font-size: 15px; }
+
+div ul li p.content {
+  border-bottom: 1px solid #A0A0A0;
+  text-align: justify; }
+
+ul {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  background-color: #F8F8F8;
+  list-style-type: decimal-leading-zero; }
+
+.date-time img {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 2px; }

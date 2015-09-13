@@ -1,20 +1,51 @@
-button {
-  border-radius: 0;
-}
 .col-six {
   width: 50%;
   display: inline-block;
 }
-.content {
-  text-align: justify;
-  word-wrap: break-word;
+button {
+  border-radius: 0;
 }
-.date-time {
+.data {
   width: 100%;
   height: auto;
+  border: 1px sold red;
+  border-bottom:1px solid #9FF;
+}
+.header {
+  width: 100%;
+  height: auto;
+}
+// h1 {
+//   font-family:"Courier New", Courier, monospace;
+//   color: #FFA;
+//   font-weight: bold;
+//   font-size: 35px;
+//   margin-top: 1rem;
+// }
+.date-time {
+  width: 100%;
+  height: 100%;
   display: inline-block;
+  color: #39F;
   text-align: right;
-  font-style: italic;
-  font-weight: bold;
 }
 
+.new p {
+  font-size: 15px;
+}
+div ul li p.content {
+  border-bottom: 1px solid #A0A0A0 ;
+  text-align: justify;
+
+}
+ul {
+  font-family:"Times New Roman", Times, serif;
+  font-size: 18px;
+  background-color: #F8F8F8  ;
+   list-style-type: decimal-leading-zero;
+}
+.date-time img {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 2px;
+}

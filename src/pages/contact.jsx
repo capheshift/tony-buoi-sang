@@ -6,7 +6,7 @@
 var React = require('react');
 var DefaultLayout = React.createFactory(require('../layouts/Default'));
 
-var HomePage = React.createClass({
+var ContactPage = React.createClass({
   getInitialState: function () {
     return {
       data: [],
@@ -129,4 +129,4 @@ var HomePage = React.createClass({
   }
 });
 
-module.exports = HomePage;
+module.exports = ContactPage;
