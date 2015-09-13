@@ -21421,11 +21421,9 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.div({className: "text-center"}, 
+	      React.DOM.div(null, 
 	        React.DOM.div({className: "header"}, 
-	          React.DOM.h1(null, "Tony Buổi Sáng")
-	        ), 
-	        React.DOM.nav({className: "navbar"}
+	          React.DOM.h4(null, "Tony Buổi Sáng")
 	        )
 	      )
 	    );

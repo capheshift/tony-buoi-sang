@@ -698,18 +698,11 @@ there.
 /* Larger than tablet */
 /* Larger than desktop */
 /* Larger than Desktop HD */
-.text-center {
-  margin: 0px;
-  padding: 0px;
-  text-align: center; }
-
 .header {
-  background-color: #09F;
-  position: fixed;
-  z-index: 10;
-  color: white; }
-  .header h1 {
-    font-size: 2.5rem;
+  width: 100%;
+  height: auto;
+  text-align: center; }
+  .header h4 {
     margin: 1rem; }
 
 .main {
@@ -727,10 +720,6 @@ button {
   height: auto;
   border: 1px sold red;
   border-bottom: 1px solid #9FF; }
-
-.header {
-  width: 100%;
-  height: auto; }
 
 .date-time {
   width: 100%;
