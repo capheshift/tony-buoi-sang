@@ -87,11 +87,11 @@
 	var router = new Router({
 	  // Main Route
 	  '/': function() {
-	    var page = React.createFactory(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./pages/index\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+	    var page = React.createFactory(__webpack_require__(159));
 	    render(router.getRoute(), page);
 	  },
 	  '/contact': function() {
-	    var page = React.createFactory(__webpack_require__(159));
+	    var page = React.createFactory(__webpack_require__(163));
 	    render(router.getRoute(), page);
 	  }
 	});
@@ -21238,6 +21238,276 @@
 	var React = __webpack_require__(1);
 	var DefaultLayout = React.createFactory(__webpack_require__(160));
 
+	var HomePage = React.createClass({displayName: 'HomePage',
+	  getInitialState: function () {
+	    return {
+	      data: [],
+	      paging: {},
+	      cache: {}
+	    };
+	  },
+
+	  componentWillMount: function () {
+	    var that = this;
+	    window.fbAsyncInit = function() {
+	      FB.init({
+	        appId      : '148203832185750',
+	        xfbml      : true,
+	        version    : 'v2.4'
+	      });
+	      that.getData();
+	    };
+
+	    (function (d, s, id) {
+	      var js, fjs = d.getElementsByTagName(s)[0];
+	      if (d.getElementById(id)) {return;}
+	      js = d.createElement(s); js.id = id;
+	      js.src = '//connect.facebook.net/en_US/sdk.js';
+	      fjs.parentNode.insertBefore(js, fjs);
+	    }(document, 'script', 'facebook-jssdk'));
+	  },
+
+	  cache: function () {
+
+	  },
+
+	  getData: function () {
+	    var that = this;
+	    var appId = '148203832185750';
+	    var appSecret = 'f566359f16826bba531241d42c464cd8';
+	    var url = 'https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id=' + appId + '&client_secret=' + appSecret;
+	    var pageName = 'TonyBuoiSang';
+
+	    return $.ajax({
+	      url: url,
+	      method: 'GET',
+	      success: function (data) {
+	        FB.api(pageName + '/feed?' + data, 'get', function (response) {
+	          if (response && !response.error) {
+	            that.setState({
+	              data: response.data,
+	              paging: response.paging
+	            });
+	          }
+	        });
+	      }
+	    });
+	  },
+
+	  getDefaultProps: function() {
+	    return {
+	      layout: DefaultLayout
+	    };
+	  },
+
+	  previous: function () {
+	    var that = this;
+	    var url = this.state.paging.previous;
+	    $('body').animate({scrollTop: 0}, 1000);
+	    return $.ajax({
+	      url: url,
+	      method: 'GET',
+	      success: function (res) {
+	        if (res.data.length) {
+	          that.setState({
+	            data: res.data,
+	            paging: res.paging
+	          });
+	        }
+	      }
+	    });
+	  },
+
+	  next: function () {
+	    var that = this;
+	    var url = this.state.paging.next;
+	    $('body').animate({scrollTop: 0}, 1000);
+	    return $.ajax({
+	      url: url,
+	      method: 'GET',
+	      success: function (res) {
+	        if (res.data.length) {
+	          that.setState({
+	            data: res.data,
+	            paging: res.paging
+	          });
+	        }
+	      }
+	    });
+	  },
+
+	  render: function() {
+	    var listItem = [];
+	    if (this.state.data.length) {
+	      this.state.data.map(function (item) {
+	        listItem.push(
+	          React.DOM.div({className: "content"}, 
+	            React.DOM.p(null, 
+	              item.message, 
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
+	            )
+	          )
+	        );
+	      });
+	    }
+	    return (
+	      React.DOM.div(null, 
+	        React.DOM.div({className: "contents"}, 
+	          listItem
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.previous}, "PREVIOUS")
+	        ), 
+	        React.DOM.div({className: "col-six"}, 
+	          React.DOM.button({className: "button-primary u-full-width", onClick: this.next}, "NEXT")
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = HomePage;
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Navbar = React.createFactory(__webpack_require__(161));
+
+	var DefaultLayout = React.createClass({
+	  displayName: 'Default.jsx',
+	  getDefaultProps:function() {
+	    return {};
+	  },
+	  render:function() {
+	    return (
+	      React.DOM.div(null, 
+	        Navbar({ uri: this.props.uri }), 
+	        React.DOM.div({className: "container"}, 
+	          this.props.children
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = DefaultLayout;
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var DEBUG = false;
+	var _name = 'Navbar.jsx';
+	var React = __webpack_require__(1);
+	var Link = React.createFactory(__webpack_require__(162));
+
+	var Navbar = React.createClass({
+
+	  displayName: _name,
+
+	  render:function() {
+	    return (
+	      React.DOM.div({className: "text-center"}, 
+	        React.DOM.div({className: "header"}, 
+	          React.DOM.h1(null, "Tony Buổi Sáng")
+	        ), 
+	        React.DOM.nav({className: "navbar"}
+	        )
+	      )
+	    );
+	  },
+
+	  /**
+	   * Internal Methods
+	   */
+	  _checkUri: function(uriCompare) {
+	    var _uri = this.props.uri[0];
+	    if (DEBUG) {
+	      console.log('[*] ' + _name + ':_checkUri ---');
+	      console.log(uriCompare);
+	      console.log(this.props.uri);
+	    }
+	    return (_uri === uriCompare) ? 'active': '';
+	  }
+
+	});
+
+	module.exports = Navbar;
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var assign = __webpack_require__(13);
+	// var RouteActions = require('../actions/RouteActions');
+
+	var Link = React.createClass({
+
+	  displayName: 'Link.jsx',
+
+	  propTypes: {
+	    to: React.PropTypes.string.isRequired
+	  },
+
+	  render:function() {
+	    var props = {};
+	    for (var key in this.props) {
+	      props[key] = this.props[key];
+	    }
+	    props.href = this.props.to && this.props.to.lastIndexOf('/', 0) === 0 ?
+	      this.props.to :
+	      '/' + this.props.to;
+
+	    // Adding Events
+	    props.onClick = this.handleClick;
+
+	    return React.createElement('a', props, this.props.children);
+	  },
+
+	  handleClick:function(e) {
+	    e.preventDefault();
+	    window.location.hash = this.props.to;
+	    // RouteActions.setRoute(this.props.to);
+	  }
+
+	});
+
+	module.exports = Link;
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var DefaultLayout = React.createFactory(__webpack_require__(160));
+
 	var ContactPage = React.createClass({displayName: 'ContactPage',
 	  getInitialState: function () {
 	    return {
@@ -21362,133 +21632,6 @@
 	});
 
 	module.exports = ContactPage;
-
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @jsx React.DOM
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var Navbar = React.createFactory(__webpack_require__(161));
-
-	var DefaultLayout = React.createClass({
-	  displayName: 'Default.jsx',
-	  getDefaultProps:function() {
-	    return {};
-	  },
-	  render:function() {
-	    return (
-	      React.DOM.div(null, 
-	        Navbar({ uri: this.props.uri }), 
-	        React.DOM.div({className: "container"}, 
-	          this.props.children
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = DefaultLayout;
-
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @jsx React.DOM
-	 */
-	'use strict';
-
-	var DEBUG = false;
-	var _name = 'Navbar.jsx';
-	var React = __webpack_require__(1);
-	var Link = React.createFactory(__webpack_require__(162));
-
-	var Navbar = React.createClass({
-
-	  displayName: _name,
-
-	  render:function() {
-	    return (
-	      React.DOM.div({className: "text-center"}, 
-	        React.DOM.div({className: "header"}, 
-	            React.DOM.h1(null, "Tony Buổi sáng")
-	        ), 
-	        React.DOM.nav({className: "navbar"}
-	        )
-	      )
-	    );
-	  },
-
-	  /**
-	   * Internal Methods
-	   */
-	  _checkUri: function(uriCompare) {
-	    var _uri = this.props.uri[0];
-	    if (DEBUG) {
-	      console.log('[*] ' + _name + ':_checkUri ---');
-	      console.log(uriCompare);
-	      console.log(this.props.uri);
-	    }
-	    return (_uri === uriCompare) ? 'active': '';
-	  }
-
-	});
-
-	module.exports = Navbar;
-
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @jsx React.DOM
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(13);
-	// var RouteActions = require('../actions/RouteActions');
-
-	var Link = React.createClass({
-
-	  displayName: 'Link.jsx',
-
-	  propTypes: {
-	    to: React.PropTypes.string.isRequired
-	  },
-
-	  render:function() {
-	    var props = {};
-	    for (var key in this.props) {
-	      props[key] = this.props[key];
-	    }
-	    props.href = this.props.to && this.props.to.lastIndexOf('/', 0) === 0 ?
-	      this.props.to :
-	      '/' + this.props.to;
-
-	    // Adding Events
-	    props.onClick = this.handleClick;
-
-	    return React.createElement('a', props, this.props.children);
-	  },
-
-	  handleClick:function(e) {
-	    e.preventDefault();
-	    window.location.hash = this.props.to;
-	    // RouteActions.setRoute(this.props.to);
-	  }
-
-	});
-
-	module.exports = Link;
 
 
 /***/ }
