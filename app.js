@@ -21242,8 +21242,7 @@
 	  getInitialState: function () {
 	    return {
 	      data: [],
-	      paging: {},
-	      cache: {}
+	      paging: {}
 	    };
 	  },
 
@@ -21265,10 +21264,6 @@
 	      js.src = '//connect.facebook.net/en_US/sdk.js';
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
-	  },
-
-	  cache: function () {
-
 	  },
 
 	  getData: function () {
@@ -21341,10 +21336,10 @@
 	    if (this.state.data.length) {
 	      this.state.data.map(function (item) {
 	        listItem.push(
-	          React.DOM.div({className: "content"}, 
-	            React.DOM.p(null, 
+	          React.DOM.li(null, 
+	            React.DOM.p({className: "content"}, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, React.DOM.img({src: "./assets/images/icon.jpg"}), " ", moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
 	            )
 	          )
 	        );
@@ -21352,7 +21347,7 @@
 	    }
 	    return (
 	      React.DOM.div(null, 
-	        React.DOM.div({className: "contents"}, 
+	        React.DOM.ul(null, 
 	          listItem
 	        ), 
 	        React.DOM.div({className: "col-six"}, 
@@ -21421,8 +21416,9 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.div(null, 
-	        React.DOM.div({className: "header"}
+	      React.DOM.div({className: "text-center"}, 
+	        React.DOM.div({className: "header"}, 
+	            React.DOM.h1(null, "Tony Buổi sáng")
 	        ), 
 	        React.DOM.nav({className: "navbar"}
 	        )
@@ -21507,7 +21503,7 @@
 	var React = __webpack_require__(1);
 	var DefaultLayout = React.createFactory(__webpack_require__(160));
 
-	var HomePage = React.createClass({displayName: 'HomePage',
+	var ContactPage = React.createClass({displayName: 'ContactPage',
 	  getInitialState: function () {
 	    return {
 	      data: [],
@@ -21630,7 +21626,7 @@
 	  }
 	});
 
-	module.exports = HomePage;
+	module.exports = ContactPage;
 
 
 /***/ }
