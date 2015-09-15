@@ -21422,8 +21422,7 @@
 	  render:function() {
 	    return (
 	      React.DOM.div(null, 
-	        React.DOM.div({className: "header"}, 
-	          React.DOM.h4(null, "Tony Buổi Sáng")
+	        React.DOM.div({className: "header"}
 	        )
 	      )
 	    );
