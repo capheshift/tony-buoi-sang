@@ -1,13 +1,9 @@
-
-.navbar {
-}
-.text-center {
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
-}
 .header {
-  background-color: #09F;
-  position: fixed;
-  z-index: 100000;
+  width: 100%;
+  height: auto;
+  text-align: center;
+
+  h4 {
+    margin: 1rem;
+  }
 }

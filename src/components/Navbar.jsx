@@ -14,12 +14,10 @@ var Navbar = React.createClass({
 
   render() {
     return (
-      <div className="text-center">
+      <div>
         <div className="header">
-            <h1>Tony Buổi sáng</h1>
+          <h4>Tony Buổi Sáng</h4>
         </div>
-        <nav className="navbar">
-        </nav>
       </div>
     );
   },

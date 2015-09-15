@@ -21242,7 +21242,8 @@
 	  getInitialState: function () {
 	    return {
 	      data: [],
-	      paging: {}
+	      paging: {},
+	      cache: {}
 	    };
 	  },
 
@@ -21264,6 +21265,10 @@
 	      js.src = '//connect.facebook.net/en_US/sdk.js';
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
+	  },
+
+	  cache: function () {
+
 	  },
 
 	  getData: function () {
@@ -21336,10 +21341,10 @@
 	    if (this.state.data.length) {
 	      this.state.data.map(function (item) {
 	        listItem.push(
-	          React.DOM.li(null, 
-	            React.DOM.p({className: "content"}, 
+	          React.DOM.div({className: "content"}, 
+	            React.DOM.p(null, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span({className: "date-time"}, React.DOM.img({src: "./assets/images/icon.jpg"}), " ", moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
+	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
 	            )
 	          )
 	        );
@@ -21347,7 +21352,7 @@
 	    }
 	    return (
 	      React.DOM.div(null, 
-	        React.DOM.ul(null, 
+	        React.DOM.div({className: "contents"}, 
 	          listItem
 	        ), 
 	        React.DOM.div({className: "col-six"}, 
@@ -21416,11 +21421,9 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.div({className: "text-center"}, 
+	      React.DOM.div(null, 
 	        React.DOM.div({className: "header"}, 
-	            React.DOM.h1(null, "Tony Buổi sáng")
-	        ), 
-	        React.DOM.nav({className: "navbar"}
+	          React.DOM.h4(null, "Tony Buổi Sáng")
 	        )
 	      )
 	    );
