@@ -33,6 +33,10 @@ var HomePage = React.createClass({
       js.src = '//connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    $.ajaxSetup({
+      cache: true
+    });
   },
 
   cache: function () {
@@ -50,7 +54,7 @@ var HomePage = React.createClass({
       url: url,
       method: 'GET',
       success: function (data) {
-        FB.api(pageName + '/feed?' + data, 'get', function (response) {
+        FB.api(pageName + '/feed?limit=10&' + data, 'get', function (response) {
           if (response && !response.error) {
             that.setState({
               data: response.data,
