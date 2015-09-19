@@ -93,6 +93,14 @@
 	  '/contact': function() {
 	    var page = React.createFactory(__webpack_require__(163));
 	    render(router.getRoute(), page);
+	  },
+	  '/feedback': function () {
+	    var page = React.createFactory(__webpack_require__(164));
+	    render(router.getRoute(), page);
+	  },
+	  '/thanks': function () {
+	    var page = React.createFactory(__webpack_require__(165));
+	    render(router.getRoute(), page);
 	  }
 	});
 
@@ -21239,16 +21247,22 @@
 	var DefaultLayout = React.createFactory(__webpack_require__(160));
 
 	var HomePage = React.createClass({displayName: 'HomePage',
+	  getDefaultProps: function() {
+	    return {
+	      layout: DefaultLayout
+	    };
+	  },
+
 	  getInitialState: function () {
 	    return {
 	      data: [],
-	      paging: {},
-	      cache: {}
+	      paging: {}
 	    };
 	  },
 
 	  componentWillMount: function () {
 	    var that = this;
+
 	    window.fbAsyncInit = function() {
 	      FB.init({
 	        appId      : '148203832185750',
@@ -21265,14 +21279,6 @@
 	      js.src = '//connect.facebook.net/en_US/sdk.js';
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
-
-	    $.ajaxSetup({
-	      cache: true
-	    });
-	  },
-
-	  cache: function () {
-
 	  },
 
 	  getData: function () {
@@ -21281,12 +21287,13 @@
 	    var appSecret = 'f566359f16826bba531241d42c464cd8';
 	    var url = 'https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id=' + appId + '&client_secret=' + appSecret;
 	    var pageName = 'TonyBuoiSang';
+	    var limit = 10;
 
 	    return $.ajax({
 	      url: url,
 	      method: 'GET',
 	      success: function (data) {
-	        FB.api(pageName + '/feed?limit=10&' + data, 'get', function (response) {
+	        FB.api(pageName + '/feed?limit=' + limit + '&' + data, 'get', function (response) {
 	          if (response && !response.error) {
 	            that.setState({
 	              data: response.data,
@@ -21294,76 +21301,63 @@
 	            });
 	          }
 	        });
+	      },
+	      error: function (xhr, status, error) {
+	        console.log(xhr, status, error);
 	      }
 	    });
 	  },
 
-	  getDefaultProps: function() {
-	    return {
-	      layout: DefaultLayout
-	    };
-	  },
-
-	  previous: function () {
+	  handleLoadMore: function () {
 	    var that = this;
-	    var url = this.state.paging.previous;
-	    $('body').animate({scrollTop: 0}, 1000);
+	    var url = this.state.paging && this.state.paging.next;
+	    var currentData = this.state.data;
+
 	    return $.ajax({
 	      url: url,
 	      method: 'GET',
 	      success: function (res) {
 	        if (res.data.length) {
+	          currentData = currentData.concat(res.data);
 	          that.setState({
-	            data: res.data,
+	            data: currentData,
 	            paging: res.paging
 	          });
 	        }
-	      }
-	    });
-	  },
-
-	  next: function () {
-	    var that = this;
-	    var url = this.state.paging.next;
-	    $('body').animate({scrollTop: 0}, 1000);
-	    return $.ajax({
-	      url: url,
-	      method: 'GET',
-	      success: function (res) {
-	        if (res.data.length) {
-	          that.setState({
-	            data: res.data,
-	            paging: res.paging
-	          });
-	        }
+	      },
+	      error: function (xhr, status, error) {
+	        console.log(xhr, status, error);
 	      }
 	    });
 	  },
 
 	  render: function() {
 	    var listItem = [];
+
 	    if (this.state.data.length) {
 	      this.state.data.map(function (item) {
 	        listItem.push(
 	          React.DOM.div({className: "content"}, 
 	            React.DOM.p(null, 
 	              item.message, 
-	              React.DOM.br(null), React.DOM.span({className: "date-time"}, moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow())
+	              React.DOM.br(null), 
+	              React.DOM.span({className: "date-time"}, 
+	                moment(item.created_time).format('DD/MM/YYYY'), " - ", moment(item.created_time).fromNow()
+	              )
 	            )
 	          )
 	        );
 	      });
 	    }
+
 	    return (
 	      React.DOM.div(null, 
+	        React.DOM.div({className: "clear-fix"}), 
 	        React.DOM.div({className: "contents"}, 
 	          listItem
 	        ), 
-	        React.DOM.div({className: "col-six"}, 
-	          React.DOM.button({className: "button-primary u-full-width", onClick: this.previous}, "PREVIOUS")
-	        ), 
-	        React.DOM.div({className: "col-six"}, 
-	          React.DOM.button({className: "button-primary u-full-width", onClick: this.next}, "NEXT")
+	        React.DOM.div({className: "load-more"}, 
+	          React.DOM.button({className: "button-default u-full-width", onClick: this.handleLoadMore}, "LOAD MORE")
 	        )
 	      )
 	    );
@@ -21425,8 +21419,16 @@
 
 	  render:function() {
 	    return (
-	      React.DOM.div(null, 
-	        React.DOM.div({className: "header"}
+	      React.DOM.div({className: "header"}, 
+	        React.DOM.div({className: "container"}, 
+	          React.DOM.div({className: "inner"}, 
+	            React.DOM.div({className: "header-logo"}, 
+	              React.DOM.h2(null, React.DOM.a({href: "/"}, "Tony Buổi Sáng"))
+	            ), 
+	            React.DOM.div({className: "header-nav"}, 
+	              React.DOM.h2({className: "text-right"}, React.DOM.a({href: "#/feedback"}, React.DOM.i({className: "fa fa-cog fa-6"})))
+	            )
+	          )
 	        )
 	      )
 	    );
@@ -21633,6 +21635,96 @@
 	});
 
 	module.exports = ContactPage;
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var DefaultLayout = React.createFactory(__webpack_require__(160));
+
+	var Feedback = React.createClass({displayName: 'Feedback',
+	  getDefaultProps: function() {
+	    return {
+	      layout: DefaultLayout
+	    };
+	  },
+
+	  handleSubmit: function (e) {
+	    e.preventDefault();
+
+	    var email = React.findDOMNode(this.refs.email).value.trim();
+	    var message = React.findDOMNode(this.refs.message).value.trim();
+
+	    if (!email || !message) {
+	      return false;
+	    }
+
+	    window.location.href = '#/thanks';
+	  },
+
+	  render: function() {
+	    return (
+	      React.DOM.div(null, 
+	        React.DOM.div({className: "clear-fix"}), 
+	        React.DOM.p(null, "Don’t hesitate to give us your feedback which help us improve this app. Thanks."), 
+	        React.DOM.form({className: "feedback-form", onSubmit: this.handleSubmit}, 
+	          React.DOM.div({className: "row"}, 
+	            React.DOM.label({for: "email"}, "Email"), 
+	            React.DOM.input({type: "text", ref: "email", className: "u-full-width", placeholder: "Your email"})
+	          ), 
+	          React.DOM.div({className: "row"}, 
+	            React.DOM.label({for: "message"}, "Your message"), 
+	            React.DOM.textarea({className: "u-full-width", ref: "message", placeholder: "Your message"})
+	          ), 
+	          React.DOM.div({className: "row"}, 
+	            React.DOM.button({className: "button-default"}, "SUBMIT")
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Feedback;
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @jsx React.DOM
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var DefaultLayout = React.createFactory(__webpack_require__(160));
+
+	var Thanks = React.createClass({displayName: 'Thanks',
+	  getDefaultProps: function() {
+	    return {
+	      layout: DefaultLayout
+	    };
+	  },
+
+	  render: function() {
+	    return (
+	      React.DOM.div(null, 
+	        React.DOM.div({className: "clear-fix"}), 
+	        React.DOM.p(null, "Thanks for your feedback! ", React.DOM.a({href: "/"}, "Comeback home!"))
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Thanks;
 
 
 /***/ }

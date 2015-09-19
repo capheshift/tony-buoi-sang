@@ -1,14 +1,14 @@
 button {
   border-radius: 0;
 }
-.col-six {
-  width: 50%;
-  display: inline-block;
+.clear-fix {
+  margin: 50px;
 }
 .contents {
   .content {
     text-align: justify;
     word-wrap: break-word;
+    border-bottom: 2px solid #ddd;
     .date-time {
       width: 100%;
       height: auto;
@@ -18,4 +18,7 @@ button {
       font-weight: bold;
     }
   }
+}
+.feedback-form {
+  margin: 15px;
 }

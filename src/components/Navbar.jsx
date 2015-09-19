@@ -14,8 +14,16 @@ var Navbar = React.createClass({
 
   render() {
     return (
-      <div>
-        <div className="header">
+      <div className="header">
+        <div className="container">
+          <div className="inner">
+            <div className="header-logo">
+              <h2><a href="/">Tony Buổi Sáng</a></h2>
+            </div>
+            <div className="header-nav">
+              <h2 className="text-right"><a href="#/feedback"><i className="fa fa-cog fa-6"></i></a></h2>
+            </div>
+          </div>
         </div>
       </div>
     );
